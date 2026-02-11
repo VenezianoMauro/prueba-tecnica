@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gaming Brutalist Custom Styles */
+@layer base {
+  body {
+    @apply bg-arcade-dark text-white font-mono;
+  }
+}
+
+@layer components {
+  .btn-brutal {
+    @apply px-6 py-3 font-bold border-4 border-black shadow-brutal
+           transition-all duration-100 uppercase tracking-wider
+           hover:translate-x-1 hover:translate-y-1 hover:shadow-none
+           active:translate-x-1 active:translate-y-1 active:shadow-none;
+  }
+
+  .btn-neon-green {
+    @apply btn-brutal bg-arcade-neon-green text-black
+           hover:bg-arcade-yellow;
+  }
+
+  .btn-hot-pink {
+    @apply btn-brutal bg-arcade-hot-pink text-white
+           hover:bg-arcade-purple;
+  }
+
+  .btn-electric-blue {
+    @apply btn-brutal bg-arcade-electric-blue text-black
+           hover:bg-arcade-neon-green;
+  }
+
+  .btn-orange {
+    @apply btn-brutal bg-arcade-orange text-black
+           hover:bg-arcade-yellow;
+  }
+
+  .card-brutal {
+    @apply bg-arcade-black border-4 border-white p-6 shadow-brutal;
+  }
+
+  .card-neon {
+    @apply bg-arcade-black border-4 border-arcade-neon-green p-6 shadow-brutal-neon;
+  }
+
+  .card-pink {
+    @apply bg-arcade-black border-4 border-arcade-hot-pink p-6 shadow-brutal-pink;
+  }
+
+  .input-brutal {
+    @apply w-full px-4 py-3 bg-arcade-black border-4 border-white
+           text-white font-mono focus:border-arcade-neon-green
+           focus:outline-none focus:shadow-brutal-neon;
+  }
+
+  .select-brutal {
+    @apply w-full px-4 py-3 bg-arcade-black border-4 border-white
+           text-white font-mono cursor-pointer
+           focus:border-arcade-neon-green focus:outline-none;
+  }
+
+  .title-arcade {
+    @apply font-arcade text-arcade-neon-green text-2xl mb-8
+           tracking-wider uppercase;
+  }
+
+  .subtitle-arcade {
+    @apply font-arcade text-arcade-hot-pink text-sm mb-4 uppercase;
+  }
+}
+
+/* Glowing text effect - white text with colored glow for better contrast */
+.glow-green {
+  color: #ffffff;
+  text-shadow: 0 0 8px #39ff14, 0 0 15px #39ff14, 0 0 25px #39ff14, 0 0 40px #39ff14;
+}
+
+.glow-pink {
+  color: #ffffff;
+  text-shadow: 0 0 8px #ff1493, 0 0 15px #ff1493, 0 0 25px #ff1493, 0 0 40px #ff1493;
+}
+
+.glow-blue {
+  color: #ffffff;
+  text-shadow: 0 0 8px #00d4ff, 0 0 15px #00d4ff, 0 0 25px #00d4ff, 0 0 40px #00d4ff;
+}
+
+.glow-yellow {
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffd700, 0 0 15px #ffd700, 0 0 25px #ffd700, 0 0 40px #ffd700;
+}
+
+/* Scanline effect for retro feel */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '_';
+  animation: blink 1s infinite;
+}
+
+/* Status badge styles */
+.status-available {
+  @apply bg-arcade-neon-green text-black;
+}
+
+.status-in_use {
+  @apply bg-arcade-hot-pink text-white;
+}
+
+.status-maintenance {
+  @apply bg-arcade-orange text-black;
+}

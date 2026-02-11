@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id           Int                   @id @default(autoincrement())
+  name         String
+  email        String                @unique
+  tokenBalance Int                   @default(0) @map("token_balance")
+  sessions     Session[]
+  achievements PlayerAchievement[]
+
+  @@map("players")
+}
+
+model Game {
+  id            Int           @id @default(autoincrement())
+  name          String
+  tokensPerPlay Int           @default(1) @map("tokens_per_play")
+  machines      Machine[]
+  achievements  Achievement[]
+
+  @@map("games")
+}
+
+model Machine {
+  id       Int       @id @default(autoincrement())
+  gameId   Int       @map("game_id")
+  game     Game      @relation(fields: [gameId], references: [id])
+  status   String    @default("available") // available, in_use, maintenance
+  sessions Session[]
+
+  @@map("machines")
+}
+
+model Session {
+  id          Int       @id @default(autoincrement())
+  playerId    Int       @map("player_id")
+  player      Player    @relation(fields: [playerId], references: [id])
+  machineId   Int       @map("machine_id")
+  machine     Machine   @relation(fields: [machineId], references: [id])
+  startedAt   DateTime  @default(now()) @map("started_at")
+  endedAt     DateTime? @map("ended_at")
+  tokensSpent Int       @map("tokens_spent")
+
+  // BUG: This constraint is WRONG - prevents replaying same machine
+  @@unique([playerId, machineId])
+  @@map("sessions")
+}
+
+model Achievement {
+  id            Int                   @id @default(autoincrement())
+  name          String
+  description   String?
+  gameId        Int                   @map("game_id")
+  game          Game                  @relation(fields: [gameId], references: [id])
+  playsRequired Int                   @map("plays_required")
+  players       PlayerAchievement[]
+
+  @@map("achievements")
+}
+
+model PlayerAchievement {
+  playerId      Int         @map("player_id")
+  player        Player      @relation(fields: [playerId], references: [id])
+  achievementId Int         @map("achievement_id")
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+  earnedAt      DateTime    @default(now()) @map("earned_at")
+
+  @@id([playerId, achievementId])
+  @@map("player_achievements")
+}
