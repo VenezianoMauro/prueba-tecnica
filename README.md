@@ -54,7 +54,7 @@ npm run dev
 
 ### Part 2: Debug Database Constraint (15-20 min)
 
-**The Bug**: Try to start a session on a machine that a player has used before. You'll get a constraint error.
+**The Bug**: Try to start a session on a machine that a player has used before. 
 
 **Steps to reproduce**:
 1. End the active session (once you implement Part 1)
@@ -64,9 +64,8 @@ npm run dev
 **Your task**:
 1. Reproduce the error
 2. Read and understand the error message
-3. Investigate the database schema (`backend/prisma/schema.prisma`)
-4. Identify the problematic constraint
-5. Explain why it's wrong and how to fix it
+3. Identify the issue
+4. Explain why it's wrong and how to fix it
 
 ### Part 3: Refactor Discussion (10-15 min)
 
@@ -75,7 +74,7 @@ npm run dev
 **Discussion points**:
 - What's wrong with this code?
 - How would you restructure it?
-- What patterns would you apply? (repository pattern, service layer, DTOs, etc.)
+- What patterns would you apply? 
 
 ---
 
@@ -137,23 +136,3 @@ npm run dev
 - **Achievements**: Pac-Man Rookie (3 plays), Pac-Man Pro (10 plays), Fighter (3 plays)
 - **Active Session**: John Doe playing Street Fighter on Machine #3
 
----
-
-## Evaluation Criteria
-
-### Part 1
-- Correct Prisma/SQL usage
-- Handles the many-to-many relationship properly
-- Uses transactions where appropriate
-- Basic error handling
-
-### Part 2
-- Reads and understands error messages
-- Knows how to inspect database constraints
-- Can reason about why the constraint is incorrect
-- Proposes correct solution
-
-### Part 3
-- Identifies lack of separation of concerns
-- Understands layered architecture concepts
-- Can articulate benefits of proper structure
