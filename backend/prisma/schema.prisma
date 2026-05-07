@@ -48,7 +48,6 @@ model Session {
   endedAt     DateTime? @map("ended_at")
   tokensSpent Int       @map("tokens_spent")
 
-  // BUG: This constraint is WRONG - prevents replaying same machine
   @@unique([playerId, machineId])
   @@map("sessions")
 }
